@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="专业桌面应用软件，提升您的工作效率">
+    <title>AppName — 专业桌面效率工具</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0f7ff',
+                            100: '#e0efff',
+                            200: '#baddff',
+                            300: '#7cc0ff',
+                            400: '#369eff',
+                            500: '#0c7df7',
+                            600: '#0060d4',
+                            700: '#004dab',
+                            800: '#03418c',
+                            900: '#073873',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        html { scroll-behavior: smooth; }
+        .fade-in { opacity: 0; transform: translateY(20px); transition: all 0.6s ease-out; }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+        .gradient-bg {
+            background: linear-gradient(135deg, #073873 0%, #0c7df7 50%, #369eff 100%);
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #0c7df7 0%, #0060d4 100%);
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px -10px rgba(12, 125, 247, 0.5);
+        }
+        .feature-card {
+            transition: all 0.3s ease;
+        }
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="font-sans bg-gray-50 text-gray-800">
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-transparent">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+            <a href="#" class="flex items-center space-x-2 text-white">
+                <div class="w-9 h-9 rounded-lg bg-white/20 flex items-center justify-center">
+                    <i class="fa-solid fa-layer-group text-white"></i>
+                </div>
+                <span class="text-lg font-semibold tracking-tight">AppName</span>
+            </a>
+            <div class="hidden md:flex items-center space-x-8 text-sm text-white/90">
+                <a href="#features" class="hover:text-white transition-colors">功能特性</a>
+                <a href="#download" class="hover:text-white transition-colors">下载</a>
+                <a href="#faq" class="hover:text-white transition-colors">常见问题</a>
+                <a href="#contact" class="hover:text-white transition-colors">联系我们</a>
+            </div>
+            <a href="#download" class="hidden md:inline-flex items-center px-4 py-2 bg-white text-brand-600 text-sm font-medium rounded-lg hover:bg-brand-50 transition-colors">
+                立即下载
+            </a>
+            <button id="menuBtn" class="md:hidden text-white text-xl" aria-label="菜单" aria-expanded="false">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="hidden md:hidden bg-white/95 backdrop-blur-md border-t border-gray-200">
+            <div class="px-6 py-4 space-y-3">
+                <a href="#features" class="block text-gray-700 hover:text-brand-600 py-2">功能特性</a>
+                <a href="#download" class="block text-gray-700 hover:text-brand-600 py-2">下载</a>
+                <a href="#faq" class="block text-gray-700 hover:text-brand-600 py-2">常见问题</a>
+                <a href="#contact" class="block text-gray-700 hover:text-brand-600 py-2">联系我们</a>
+                <a href="#download" class="block text-center px-4 py-2 btn-primary text-white font-medium rounded-lg">立即下载</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="gradient-bg relative overflow-hidden pt-24 pb-20 md:pt-32 md:pb-28">
+        <div class="absolute inset-0 opacity-20">
+            <div class="absolute top-20 -left-20 w-96 h-96 bg-white rounded-full blur-3xl"></div>
+            <div class="absolute bottom-0 -right-20 w-96 h-96 bg-brand-300 rounded-full blur-3xl"></div>
+        </div>
+        <div class="relative max-w-6xl mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="text-center md:text-left">
+                    <div class="inline-flex items-center px-3 py-1 rounded-full glass-card text-white/90 text-xs mb-6">
+                        <span class="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></span>
+                        最新版本 v1.0.0 已发布
+                    </div>
+                    <h1 class="text-4xl md:text-5xl font-bold text-white leading-tight mb-6">
+                        让工作更高效的<br>专业桌面工具
+                    </h1>
+                    <p class="text-lg text-white/80 mb-8 leading-relaxed max-w-lg mx-auto md:mx-0">
+                        简洁、稳定、强大。为专业人士打造的桌面应用软件，助您提升效率、专注创造。
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                        <a href="#download" class="inline-flex items-center justify-center px-8 py-3.5 bg-white text-brand-700 font-semibold rounded-xl hover:bg-brand-50 transition-all hover:-translate-y-0.5 shadow-xl shadow-brand-900/20">
+                            <i class="fa-solid fa-download mr-2"></i>
+                            免费下载
+                        </a>
+                        <a href="#features" class="inline-flex items-center justify-center px-8 py-3.5 glass-card text-white font-medium rounded-xl hover:bg-white/15 transition-all">
+                            了解更多
+                            <i class="fa-solid fa-arrow-right ml-2 text-sm"></i>
+                        </a>
+                    </div>
+                    <div class="mt-8 flex items-center justify-center md:justify-start space-x-6 text-white/70 text-sm">
+                        <span class="flex items-center">
+                            <i class="fa-brands fa-windows mr-2"></i> Windows
+                        </span>
+                        <span class="flex items-center">
+                            <i class="fa-brands fa-apple mr-2"></i> macOS
+                        </span>
+                        <span class="flex items-center">
+                            <i class="fa-brands fa-linux mr-2"></i> Linux
+                        </span>
+                    </div>
+                </div>
+                <div class="hidden md:block">
+                    <div class="relative">
+                        <div class="absolute inset-0 bg-gradient-to-tr from-brand-400/30 to-transparent rounded-2xl blur-2xl"></div>
+                        <div class="relative bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20 p-2 shadow-2xl">
+                            <div class="bg-gray-900 rounded-xl overflow-hidden aspect-video flex items-center justify-center">
+                                <div class="text-center">
+                                    <i class="fa-solid fa-desktop text-6xl text-brand-400/50 mb-4"></i>
+                                    <p class="text-gray-500 text-sm">App 界面预览</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+
+        <!-- Features Section -->
+        <section id="features" class="py-20 md:py-28 bg-white">
+            <div class="max-w-6xl mx-auto px-6">
+                <div class="text-center mb-16 fade-in">
+                    <p class="text-brand-600 font-medium text-sm uppercase tracking-wider mb-3">核心功能</p>
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">为什么选择我们</h2>
+                    <p class="text-gray-500 max-w-2xl mx-auto">专注打磨每一个细节，为您提供稳定、高效、易用的桌面体验</p>
+                </div>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="feature-card fade-in bg-gray-50 rounded-2xl p-8 border border-gray-100">
+                        <div class="w-12 h-12 rounded-xl bg-brand-100 flex items-center justify-center mb-5">
+                            <i class="fa-solid fa-bolt text-brand-600 text-xl"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-gray-900 mb-3">极速响应</h3>
+                        <p class="text-gray-500 leading-relaxed text-sm">原生架构设计，启动快、运行流畅，即使处理大量数据也能保持稳定性能。</p>
+                    </div>
+                    <div class="feature-card fade-in bg-gray-50 rounded-2xl p-8 border border-gray-100" style="transition-delay: 0.1s">
+                        <div class="w-12 h-12 rounded-xl bg-brand-100 flex items-center justify-center mb-5">
+                            <i class="fa-solid fa-shield-halved text-brand-600 text-xl"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-gray-900 mb-3">数据安全</h3>
+                        <p class="text-gray-500 leading-relaxed text-sm">本地存储，数据不上传云端。您的隐私由您完全掌控，安全无忧。</p>
+                    </div>
+                    <div class="feature-card fade-in bg-gray-50 rounded-2xl p-8 border border-gray-100" style="transition-delay: 0.2s">
+                        <div class="w-12 h-12 rounded-xl bg-brand-100 flex items-center justify-center mb-5">
+                            <i class="fa-solid fa-wand-magic-sparkles text-brand-600 text-xl"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-gray-900 mb-3">简洁高效</h3>
+                        <p class="text-gray-500 leading-relaxed text-sm">精心设计的界面，去除繁杂功能，让您专注于真正重要的事情。</p>
+                    </div>
+                    <div class="feature-card fade-in bg-gray-50 rounded-2xl p-8 border border-gray-100" style="transition-delay: 0.1s">
+                        <div class="w-12 h-12 rounded-xl bg-brand-100 flex items-center justify-center mb-5">
+                            <i class="fa-solid fa-code-compare text-brand-600 text-xl"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-gray-900 mb-3">自动更新</h3>
+                        <p class="text-gray-500 leading-relaxed text-sm">内置更新机制，第一时间获取最新功能和安全修复，永不过时。</p>
+                    </div>
+                    <div class="feature-card fade-in bg-gray-50 rounded-2xl p-8 border border-gray-100" style="transition-delay: 0.2s">
+                        <div class="w-12 h-12 rounded-xl bg-brand-100 flex items-center justify-center mb-5">
+                            <i class="fa-solid fa-headset text-brand-600 text-xl"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-gray-900 mb-3">贴心支持</h3>
+                        <p class="text-gray-500 leading-relaxed text-sm">遇到问题？我们提供及时的技术支持和详尽的使用文档。</p>
+                    </div>
+                    <div class="feature-card fade-in bg-gray-50 rounded-2xl p-8 border border-gray-100" style="transition-delay: 0.3s">
+                        <div class="w-12 h-12 rounded-xl bg-brand-100 flex items-center justify-center mb-5">
+                            <i class="fa-solid fa-layer-group text-brand-600 text-xl"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-gray-900 mb-3">跨平台</h3>
+                        <p class="text-gray-500 leading-relaxed text-sm">支持 Windows、macOS、Linux 三大平台，随时随地无缝切换。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Download Section -->
+        <section id="download" class="py-20 md:py-28 bg-gradient-to-b from-gray-50 to-white">
+            <div class="max-w-6xl mx-auto px-6">
+                <div class="text-center mb-14 fade-in">
+                    <p class="text-brand-600 font-medium text-sm uppercase tracking-wider mb-3">下载</p>
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">立即开始使用</h2>
+                    <p class="text-gray-500 max-w-2xl mx-auto">选择您的操作系统，免费下载体验</p>
+                </div>
+                <div class="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+                    <a href="./test.exe" download class="download-card fade-in group bg-white rounded-2xl p-8 border border-gray-200 hover:border-brand-400 hover:shadow-xl transition-all text-center">
+                        <div class="w-16 h-16 mx-auto mb-5 rounded-2xl bg-blue-50 flex items-center justify-center group-hover:bg-blue-100 transition-colors">
+                            <i class="fa-brands fa-windows text-3xl text-blue-600"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">Windows</h3>
+                        <p class="text-gray-400 text-sm mb-4">Windows 10 / 11 (64位)</p>
+                        <span class="inline-flex items-center text-brand-600 font-medium group-hover:translate-x-1 transition-transform">
+                            下载安装包
+                            <i class="fa-solid fa-arrow-down ml-2 text-sm"></i>
+                        </span>
+                    </a>
+                    <a href="#" class="download-card fade-in group bg-white rounded-2xl p-8 border border-gray-200 hover:border-brand-400 hover:shadow-xl transition-all text-center" style="transition-delay: 0.1s">
+                        <div class="w-16 h-16 mx-auto mb-5 rounded-2xl bg-gray-100 flex items-center justify-center group-hover:bg-gray-200 transition-colors">
+                            <i class="fa-brands fa-apple text-3xl text-gray-700"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">macOS</h3>
+                        <p class="text-gray-400 text-sm mb-4">macOS 11 及以上</p>
+                        <span class="inline-flex items-center text-brand-600 font-medium group-hover:translate-x-1 transition-transform">
+                            下载 DMG
+                            <i class="fa-solid fa-arrow-down ml-2 text-sm"></i>
+                        </span>
+                    </a>
+                    <a href="#" class="download-card fade-in group bg-white rounded-2xl p-8 border border-gray-200 hover:border-brand-400 hover:shadow-xl transition-all text-center" style="transition-delay: 0.2s">
+                        <div class="w-16 h-16 mx-auto mb-5 rounded-2xl bg-orange-50 flex items-center justify-center group-hover:bg-orange-100 transition-colors">
+                            <i class="fa-brands fa-linux text-3xl text-orange-600"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">Linux</h3>
+                        <p class="text-gray-400 text-sm mb-4">deb / AppImage</p>
+                        <span class="inline-flex items-center text-brand-600 font-medium group-hover:translate-x-1 transition-transform">
+                            下载
+                            <i class="fa-solid fa-arrow-down ml-2 text-sm"></i>
+                        </span>
+                    </a>
+                </div>
+                <div class="text-center mt-10 text-sm text-gray-400 fade-in">
+                    <p>版本 v1.0.0 · 更新于 2026-07-26 · <a href="#" class="text-brand-500 hover:underline">查看更新日志</a></p>
+                    <p class="mt-2">
+                        <a href="#" class="text-gray-400 hover:text-gray-600">
+                            <i class="fa-brands fa-github mr-1"></i> GitHub
+                        </a>
+                        <span class="mx-3">·</span>
+                        <a href="#" class="text-gray-400 hover:text-gray-600">
+                            <i class="fa-solid fa-file-contract mr-1"></i> 软件许可协议
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section id="faq" class="py-20 md:py-28 bg-white">
+            <div class="max-w-3xl mx-auto px-6">
+                <div class="text-center mb-14 fade-in">
+                    <p class="text-brand-600 font-medium text-sm uppercase tracking-wider mb-3">常见问题</p>
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">您可能想了解</h2>
+                </div>
+                <div class="space-y-4">
+                    <div class="faq-item fade-in border border-gray-200 rounded-xl overflow-hidden">
+                        <button class="faq-btn w-full flex items-center justify-between px-6 py-5 text-left hover:bg-gray-50 transition-colors">
+                            <span class="font-medium text-gray-900">软件是免费的吗？</span>
+                            <i class="fa-solid fa-plus text-gray-400 faq-icon transition-transform"></i>
+                        </button>
+                        <div class="faq-content hidden px-6 pb-5">
+                            <p class="text-gray-500 text-sm leading-relaxed">基础功能完全免费，您可以自由使用。高级功能需要升级至专业版，支持一次性买断或订阅。</p>
+                        </div>
+                    </div>
+                    <div class="faq-item fade-in border border-gray-200 rounded-xl overflow-hidden">
+                        <button class="faq-btn w-full flex items-center justify-between px-6 py-5 text-left hover:bg-gray-50 transition-colors">
+                            <span class="font-medium text-gray-900">支持哪些操作系统？</span>
+                            <i class="fa-solid fa-plus text-gray-400 faq-icon transition-transform"></i>
+                        </button>
+                        <div class="faq-content hidden px-6 pb-5">
+                            <p class="text-gray-500 text-sm leading-relaxed">目前支持 Windows 10/11（64位）、macOS 11 Big Sur 及以上版本、以及主流 Linux 发行版（Ubuntu、Debian、Fedora 等）。</p>
+                        </div>
+                    </div>
+                    <div class="faq-item fade-in border border-gray-200 rounded-xl overflow-hidden">
+                        <button class="faq-btn w-full flex items-center justify-between px-6 py-5 text-left hover:bg-gray-50 transition-colors">
+                            <span class="font-medium text-gray-900">我的数据安全吗？</span>
+                            <i class="fa-solid fa-plus text-gray-400 faq-icon transition-transform"></i>
+                        </button>
+                        <div class="faq-content hidden px-6 pb-5">
+                            <p class="text-gray-500 text-sm leading-relaxed">您的数据全部存储在本地，我们不会上传任何用户数据到服务器。您可以完全掌控自己的数据。</p>
+                        </div>
+                    </div>
+                    <div class="faq-item fade-in border border-gray-200 rounded-xl overflow-hidden">
+                        <button class="faq-btn w-full flex items-center justify-between px-6 py-5 text-left hover:bg-gray-50 transition-colors">
+                            <span class="font-medium text-gray-900">如何获取技术支持？</span>
+                            <i class="fa-solid fa-plus text-gray-400 faq-icon transition-transform"></i>
+                        </button>
+                        <div class="faq-content hidden px-6 pb-5">
+                            <p class="text-gray-500 text-sm leading-relaxed">您可以通过页面底部的邮箱联系我们，也可以在 GitHub 提交 Issue。我们会在 1-2 个工作日内回复。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA / Contact Section -->
+        <section id="contact" class="py-20 md:py-24 gradient-bg relative overflow-hidden">
+            <div class="absolute inset-0 opacity-20">
+                <div class="absolute top-0 right-0 w-96 h-96 bg-white rounded-full blur-3xl translate-x-1/2 -translate-y-1/2"></div>
+            </div>
+            <div class="relative max-w-4xl mx-auto px-6 text-center fade-in">
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">准备好开始了吗？</h2>
+                <p class="text-white/80 mb-8 max-w-xl mx-auto">免费下载，无需注册。立即体验专业桌面效率工具。</p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="#download" class="inline-flex items-center justify-center px-8 py-3.5 bg-white text-brand-700 font-semibold rounded-xl hover:bg-brand-50 transition-all hover:-translate-y-0.5 shadow-xl shadow-brand-900/20">
+                        <i class="fa-solid fa-download mr-2"></i>
+                        立即下载
+                    </a>
+                    <a href="mailto:contact@example.com" class="inline-flex items-center justify-center px-8 py-3.5 glass-card text-white font-medium rounded-xl hover:bg-white/15 transition-all">
+                        <i class="fa-solid fa-envelope mr-2"></i>
+                        联系我们
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-400 py-12">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="grid md:grid-cols-4 gap-8 mb-10">
+                <div class="md:col-span-2">
+                    <div class="flex items-center space-x-2 text-white mb-4">
+                        <div class="w-9 h-9 rounded-lg bg-brand-600 flex items-center justify-center">
+                            <i class="fa-solid fa-layer-group text-white"></i>
+                        </div>
+                        <span class="text-lg font-semibold">AppName</span>
+                    </div>
+                    <p class="text-sm leading-relaxed max-w-sm">为专业人士打造的桌面效率工具，让工作更高效、更专注。</p>
+                </div>
+                <div>
+                    <h4 class="text-white font-medium mb-4 text-sm">产品</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#features" class="hover:text-white transition-colors">功能特性</a></li>
+                        <li><a href="#download" class="hover:text-white transition-colors">下载</a></li>
+                        <li><a href="#faq" class="hover:text-white transition-colors">常见问题</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">更新日志</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-medium mb-4 text-sm">联系</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li>
+                            <a href="mailto:contact@example.com" class="hover:text-white transition-colors flex items-center">
+                                <i class="fa-solid fa-envelope w-5"></i>
+                                contact@example.com
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="hover:text-white transition-colors flex items-center">
+                                <i class="fa-brands fa-github w-5"></i>
+                                GitHub
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="hover:text-white transition-colors flex items-center">
+                                <i class="fa-brands fa-gitee w-5"></i>
+                                Gitee
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center text-xs">
+                <p>&copy; 2026 AppName. All rights reserved.</p>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-white transition-colors">隐私政策</a>
+                    <a href="#" class="hover:text-white transition-colors">用户协议</a>
+                    <a href="#" class="hover:text-white transition-colors">Cookie 设置</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to top button -->
+    <button id="backToTop" class="fixed bottom-8 right-8 w-11 h-11 rounded-full bg-brand-600 text-white shadow-lg opacity-0 invisible transition-all hover:bg-brand-700 hover:-translate-y-1 z-40" aria-label="返回顶部">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
+
+    <script>
+        // DOM references
+        const navbar = document.getElementById('navbar');
+        const menuBtn = document.getElementById('menuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const backToTop = document.getElementById('backToTop');
+        const faqBtns = document.querySelectorAll('.faq-btn');
+        const fadeElements = document.querySelectorAll('.fade-in');
+
+        // Navbar scroll effect
+        let lastScroll = 0;
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            if (currentScroll > 50) {
+                navbar.classList.add('bg-white/95', 'backdrop-blur-md', 'shadow-sm');
+                navbar.classList.remove('bg-transparent');
+                const navLinks = navbar.querySelectorAll('a:not(.md\\:inline-flex)');
+                const logoText = navbar.querySelector('span.text-lg');
+                const logoIcon = navbar.querySelector('.fa-layer-group').parentElement;
+                navLinks.forEach(link => {
+                    if (!link.classList.contains('text-brand-600') && !link.classList.contains('bg-white')) {
+                        link.classList.remove('text-white', 'text-white/90');
+                        link.classList.add('text-gray-700', 'hover:text-brand-600');
+                    }
+                });
+                if (logoText) {
+                    logoText.classList.remove('text-white');
+                    logoText.classList.add('text-gray-900');
+                }
+                if (logoIcon) {
+                    logoIcon.classList.remove('bg-white/20');
+                    logoIcon.classList.add('bg-brand-100');
+                    const icon = logoIcon.querySelector('i');
+                    if (icon) {
+                        icon.classList.remove('text-white');
+                        icon.classList.add('text-brand-600');
+                    }
+                }
+                const menuBtnIcon = menuBtn.querySelector('i');
+                if (menuBtnIcon) {
+                    menuBtnIcon.classList.remove('text-white');
+                    menuBtnIcon.classList.add('text-gray-700');
+                }
+                const ctaBtn = navbar.querySelector('a.md\\:inline-flex');
+                if (ctaBtn) {
+                    ctaBtn.classList.remove('bg-white', 'text-brand-600', 'hover:bg-brand-50');
+                    ctaBtn.classList.add('btn-primary', 'text-white');
+                }
+            } else {
+                navbar.classList.remove('bg-white/95', 'backdrop-blur-md', 'shadow-sm');
+                navbar.classList.add('bg-transparent');
+                const navLinks = navbar.querySelectorAll('a:not(.md\\:inline-flex)');
+                const logoText = navbar.querySelector('span.text-lg');
+                const logoIcon = navbar.querySelector('.fa-layer-group').parentElement;
+                navLinks.forEach(link => {
+                    if (!link.classList.contains('btn-primary')) {
+                        link.classList.add('text-white/90', 'hover:text-white');
+                        link.classList.remove('text-gray-700', 'hover:text-brand-600');
+                    }
+                });
+                if (logoText) {
+                    logoText.classList.add('text-white');
+                    logoText.classList.remove('text-gray-900');
+                }
+                if (logoIcon) {
+                    logoIcon.classList.add('bg-white/20');
+                    logoIcon.classList.remove('bg-brand-100');
+                    const icon = logoIcon.querySelector('i');
+                    if (icon) {
+                        icon.classList.add('text-white');
+                        icon.classList.remove('text-brand-600');
+                    }
+                }
+                const menuBtnIcon = menuBtn.querySelector('i');
+                if (menuBtnIcon) {
+                    menuBtnIcon.classList.add('text-white');
+                    menuBtnIcon.classList.remove('text-gray-700');
+                }
+                const ctaBtn = navbar.querySelector('a.md\\:inline-flex');
+                if (ctaBtn) {
+                    ctaBtn.classList.add('bg-white', 'text-brand-600', 'hover:bg-brand-50');
+                    ctaBtn.classList.remove('btn-primary', 'text-white');
+                }
+            }
+
+            // Back to top button
+            if (currentScroll > 400) {
+                backToTop.classList.remove('opacity-0', 'invisible');
+                backToTop.classList.add('opacity-100', 'visible');
+            } else {
+                backToTop.classList.add('opacity-0', 'invisible');
+                backToTop.classList.remove('opacity-100', 'visible');
+            }
+
+            lastScroll = currentScroll;
+        });
+
+        // Mobile menu toggle
+        menuBtn.addEventListener('click', () => {
+            const isOpen = !mobileMenu.classList.contains('hidden');
+            mobileMenu.classList.toggle('hidden');
+            menuBtn.setAttribute('aria-expanded', !isOpen);
+            const icon = menuBtn.querySelector('i');
+            if (icon) {
+                icon.classList.toggle('fa-bars');
+                icon.classList.toggle('fa-xmark');
+            }
+        });
+
+        // Close mobile menu on link click
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                menuBtn.setAttribute('aria-expanded', 'false');
+                const icon = menuBtn.querySelector('i');
+                if (icon) {
+                    icon.classList.add('fa-bars');
+                    icon.classList.remove('fa-xmark');
+                }
+            });
+        });
+
+        // FAQ accordion
+        faqBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const content = btn.nextElementSibling;
+                const icon = btn.querySelector('.faq-icon');
+                const isOpen = !content.classList.contains('hidden');
+
+                faqBtns.forEach(otherBtn => {
+                    if (otherBtn !== btn) {
+                        otherBtn.nextElementSibling.classList.add('hidden');
+                        otherBtn.querySelector('.faq-icon').classList.remove('rotate-45');
+                    }
+                });
+
+                content.classList.toggle('hidden');
+                icon.classList.toggle('rotate-45');
+            });
+        });
+
+        // Back to top
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Intersection Observer for fade-in animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+
+        fadeElements.forEach(el => observer.observe(el));
+    </script>
+
+</body>
+</html>
