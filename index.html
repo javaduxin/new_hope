@@ -76,7 +76,7 @@
                 <a href="#features" class="hover:text-white transition-colors">功能特性</a>
                 <a href="#download" class="hover:text-white transition-colors">下载</a>
                 <a href="#faq" class="hover:text-white transition-colors">常见问题</a>
-                <a href="#contact" class="hover:text-white transition-colors">联系我们</a>
+                <a href="#" id="navContact" class="hover:text-white transition-colors cursor-pointer">联系我们</a>
             </div>
             <a href="#download" class="hidden md:inline-flex items-center px-4 py-2 bg-white text-brand-600 text-sm font-medium rounded-lg hover:bg-brand-50 transition-colors">
                 立即下载
@@ -91,7 +91,7 @@
                 <a href="#features" class="block text-gray-700 hover:text-brand-600 py-2">功能特性</a>
                 <a href="#download" class="block text-gray-700 hover:text-brand-600 py-2">下载</a>
                 <a href="#faq" class="block text-gray-700 hover:text-brand-600 py-2">常见问题</a>
-                <a href="#contact" class="block text-gray-700 hover:text-brand-600 py-2">联系我们</a>
+                <a href="#" id="mobileContact" class="block text-gray-700 hover:text-brand-600 py-2">联系我们</a>
                 <a href="#download" class="block text-center px-4 py-2 btn-primary text-white font-medium rounded-lg">立即下载</a>
             </div>
         </div>
@@ -331,8 +331,8 @@
                         <i class="fa-solid fa-download mr-2"></i>
                         立即下载
                     </a>
-                    <a href="mailto:contact@example.com" class="inline-flex items-center justify-center px-8 py-3.5 glass-card text-white font-medium rounded-xl hover:bg-white/15 transition-all">
-                        <i class="fa-solid fa-envelope mr-2"></i>
+                    <a href="#" id="ctaContact" class="inline-flex items-center justify-center px-8 py-3.5 glass-card text-white font-medium rounded-xl hover:bg-white/15 transition-all cursor-pointer">
+                        <i class="fa-brands fa-weixin mr-2"></i>
                         联系我们
                     </a>
                 </div>
@@ -340,6 +340,24 @@
         </section>
 
     </main>
+
+    <!-- WeChat Modal -->
+    <div id="wechatModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/60 backdrop-blur-sm">
+        <div class="relative bg-white rounded-2xl p-8 max-w-sm mx-4 text-center shadow-2xl">
+            <button id="closeWechat" class="absolute top-3 right-3 w-8 h-8 rounded-full text-gray-400 hover:text-gray-600 hover:bg-gray-100 flex items-center justify-center transition-colors" aria-label="关闭">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="w-14 h-14 mx-auto mb-3 rounded-full bg-green-50 flex items-center justify-center">
+                <i class="fa-brands fa-weixin text-2xl text-green-500"></i>
+            </div>
+            <h3 class="text-lg font-semibold text-gray-900 mb-1">微信扫码添加</h3>
+            <p class="text-sm text-gray-400 mb-5">扫码添加好友，获取技术支持与产品动态</p>
+            <div class="bg-gray-50 rounded-xl p-4 mb-4">
+                <img src="./vx.jpg" alt="微信二维码" class="w-48 h-48 mx-auto rounded-lg object-cover" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22192%22 height=%22192%22><rect fill=%22%23f3f4f6%22 width=%22192%22 height=%22192%22/><text fill=%22%239ca3af%22 font-size=%2214%22 x=%2296%22 y=%22100%22 text-anchor=%22middle%22>微信二维码</text></svg>'">
+            </div>
+            <p class="text-xs text-gray-400">长按或截图保存二维码</p>
+        </div>
+    </div>
 
     <!-- Footer -->
     <footer class="bg-gray-900 text-gray-400 py-12">
@@ -370,6 +388,12 @@
                             <a href="mailto:contact@example.com" class="hover:text-white transition-colors flex items-center">
                                 <i class="fa-solid fa-envelope w-5"></i>
                                 contact@example.com
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" id="footerWechat" class="hover:text-white transition-colors flex items-center cursor-pointer">
+                                <i class="fa-brands fa-weixin w-5"></i>
+                                微信扫码添加
                             </a>
                         </li>
                         <li>
@@ -563,6 +587,45 @@
         });
 
         fadeElements.forEach(el => observer.observe(el));
+
+        // WeChat modal
+        const wechatModal = document.getElementById('wechatModal');
+        const closeWechat = document.getElementById('closeWechat');
+        const navContact = document.getElementById('navContact');
+        const mobileContact = document.getElementById('mobileContact');
+        const footerWechat = document.getElementById('footerWechat');
+        const contactBtn = document.querySelector('a[href="#contact"]');
+
+        function openWechatModal(e) {
+            if (e) e.preventDefault();
+            wechatModal.classList.remove('hidden');
+            wechatModal.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeWechatModal() {
+            wechatModal.classList.add('hidden');
+            wechatModal.classList.remove('flex');
+            document.body.style.overflow = '';
+        }
+
+        const ctaContact = document.getElementById('ctaContact');
+
+        [navContact, mobileContact, footerWechat, ctaContact].forEach(el => {
+            if (el) el.addEventListener('click', openWechatModal);
+        });
+
+        if (closeWechat) closeWechat.addEventListener('click', closeWechatModal);
+
+        wechatModal.addEventListener('click', (e) => {
+            if (e.target === wechatModal) closeWechatModal();
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !wechatModal.classList.contains('hidden')) {
+                closeWechatModal();
+            }
+        });
     </script>
 
 </body>
